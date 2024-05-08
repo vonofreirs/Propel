@@ -81,6 +81,8 @@ class DebugPDOStatement extends PDOStatement
                     $boundValue = trim($boundValue, "'");
                     $boundValue = $this->pdo->quote($boundValue);
                 }
+                // str replace does no longer accept null, only if it's a string
+                $boundValue = is_null($boundValue) ? 'NULL' : $boundValue;
                 $sql = str_replace($pos, $boundValue, $sql);
             }
         }
